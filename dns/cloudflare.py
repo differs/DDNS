@@ -46,7 +46,7 @@ def request(method, action, param=None, **params):
 
     if method in ['PUT', 'POST', 'PATCH']:
         # 从public_v(4,6)获取的IP是bytes类型，在json.dumps时会报TypeError
-        params['content'] = str(params.get('content'))
+        params['content'] = params.get('content').decode('utf-8')
         params = jsonencode(params)
     else:  # (GET, DELETE) where DELETE doesn't require params in Cloudflare
         if params:
